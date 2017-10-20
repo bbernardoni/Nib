@@ -1,6 +1,7 @@
 # vs files
 Debug/
 Release/
+.vs/
 
 *.suo
 *.user
