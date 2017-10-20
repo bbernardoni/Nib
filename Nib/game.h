@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "core/object.h"
 #include "objs/player.h"
+#include "objs/world.h"
 #include "input/textInput.h"
 #include "gameInput.h"
 using namespace sf;
@@ -35,5 +36,5 @@ private:
 	int frame;
 
 	Player player;
-	RectangleShape ground;
+	World world;
 };

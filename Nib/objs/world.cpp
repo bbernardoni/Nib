@@ -1,17 +1,11 @@
 #include "world.h"
+#include "../game.h"
 
 World::World(Game& game):
-	Object(game)
+	VectObj(game, game.getRes().getWorld1Model())
 {
-
 }
 
 void World::update(){
-	
 	updateChildren();
-}
-
-void World::draw(RenderTarget& target, RenderStates states) const{
-	//states.shader = &model->shader;
-	Object::draw(target, states);
 }

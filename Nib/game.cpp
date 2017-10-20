@@ -3,7 +3,7 @@
 Game::Game():
 	Object(*this),
 	player(*this),
-	ground(Vector2f(1600,5))
+	world(*this)
 {
 	srand((unsigned int)time(NULL));
 	sf::ContextSettings settings;
@@ -15,8 +15,8 @@ Game::Game():
 	player.setPosition(100, 200);
 	addChild(&player);
 
-	ground.setPosition(0, 800);
-	addDrawable(&ground);
+	world.setPosition(Vector2f(getWinSize()/2u));
+	addChild(&world);
 }
 
 Game::~Game(){

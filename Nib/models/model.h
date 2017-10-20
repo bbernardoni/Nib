@@ -1,11 +1,14 @@
 #pragma once
 
-#include "../core/object.h"
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include <fstream>
 
-struct PlayerModel {
-	PlayerModel(const std::string &filename);
+using namespace std;
+using namespace sf;
+
+struct Model {
+	Model(const std::string &filename);
 
 	vector<Vector2i> nibs;
 	vector<vector<size_t>> sibs;

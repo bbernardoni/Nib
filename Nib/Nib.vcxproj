@@ -121,6 +121,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\object.cpp" />
+    <ClCompile Include="core\vectObj.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameInput.cpp" />
     <ClCompile Include="input\axisInput.cpp" />
@@ -132,7 +133,7 @@
     <ClCompile Include="input\textInput.cpp" />
     <ClCompile Include="input\trigBoolInput.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="models\playerModel.cpp" />
+    <ClCompile Include="models\model.cpp" />
     <ClCompile Include="objs\player.cpp" />
     <ClCompile Include="objs\world.cpp" />
     <ClCompile Include="res.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="core\machine.h" />
     <ClInclude Include="core\object.h" />
+    <ClInclude Include="core\vectObj.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameInput.h" />
     <ClInclude Include="input\axisInput.h" />
@@ -150,7 +152,7 @@
     <ClInclude Include="input\keyInput.h" />
     <ClInclude Include="input\textInput.h" />
     <ClInclude Include="input\trigBoolInput.h" />
-    <ClInclude Include="models\playerModel.h" />
+    <ClInclude Include="models\model.h" />
     <ClInclude Include="objs\player.h" />
     <ClInclude Include="objs\world.h" />
     <ClInclude Include="res.h" />

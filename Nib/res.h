@@ -1,17 +1,19 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "models/playerModel.h"
+#include "models/model.h"
 using namespace sf;
 
 class Res {
 public:
 	Res();
 
-	PlayerModel* getPlayerModel();
+	Model* getPlayerModel();
+	Model* getWorld1Model();
 	Font* getMonoFont();
 
 private:
-	PlayerModel* playerMod;
+	Model* playerMod;
+	Model* world1Model;
 	Font* monoFont;
 };

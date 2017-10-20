@@ -1,6 +1,6 @@
-#include "playerModel.h"
+#include "model.h"
 
-PlayerModel::PlayerModel(const std::string &filename)
+Model::Model(const std::string &filename)
 {
 	ifstream inF(filename);
 	size_t arrsSize;
@@ -27,7 +27,7 @@ PlayerModel::PlayerModel(const std::string &filename)
 	shader.setUniform("thickness", 3.f);
 }
 
-size_t PlayerModel::addNib(Vector2i nib){
+size_t Model::addNib(Vector2i nib){
 	size_t index;
 	for(index=0; index<nibs.size(); index++){
 		if(nibs[index] == nib)

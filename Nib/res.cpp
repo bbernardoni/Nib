@@ -5,10 +5,16 @@ Res::Res(){
 	monoFont = nullptr;
 }
 
-PlayerModel* Res::getPlayerModel(){
+Model* Res::getPlayerModel(){
 	if(!playerMod)
-		playerMod = new PlayerModel("res/player.mod");
+		playerMod = new Model("res/player.mod");
 	return playerMod;
+}
+
+Model* Res::getWorld1Model(){
+	if(!world1Model)
+		world1Model = new Model("res/world1.mod");
+	return world1Model;
 }
 
 Font* Res::getMonoFont(){

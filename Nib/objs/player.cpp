@@ -2,24 +2,14 @@
 #include "../game.h"
 
 Player::Player(Game& game):
-	Object(game),
-	model(game.getRes().getPlayerModel()),
+	VectObj(game, game.getRes().getPlayerModel()),
 	jumpFSM(this)
 {
-	ribs.resize(model->sibs.size());
-	for(size_t i=0; i<model->sibs.size(); i++){
-		ribs[i] = VertexArray(LineStrip, model->sibs[i].size());
-		for(size_t j=0; j<model->sibs[i].size(); j++){
-			ribs[i][j].position = subToScreen(model->nibs[model->sibs[i][j]]);
-		}
-		addDrawable(&ribs[i]);
-	}
-
 	moveMaxSpeed = 10.0f;
 	moveAccel = 4.0f;
 	moveDrag = 0.7f;
 	jumpSpeed = 20.0f;
-	jumpDrag = 0.97f;
+	jumpDrag = 0.95f;
 	gravity = -2.0f;
 
 	moveVel = 0.0f;
@@ -38,37 +28,7 @@ void Player::update(){
 
 	jumpFSM.updateState();
 
-	if(game.getFrame() % 4 == 0){
-		vector<Vector2i> nibsOff;
-		for(size_t i=0; i<model->nibs.size(); i++){
-			nibsOff.push_back(Vector2i(getRand(), getRand()));
-		}
-		for(size_t i=0; i<model->sibs.size(); i++){
-			for(size_t j=0; j<model->sibs[i].size(); j++){
-				size_t sib = model->sibs[i][j];
-				ribs[i][j].position = subToScreen(model->nibs[sib] + nibsOff[sib]);
-			}
-		}
-	}
-	model->shader.setUniform("winSize", Vector2f(game.getWinSize()));
-	
 	updateChildren();
-}
-
-void Player::draw(RenderTarget& target, RenderStates states) const{
-	states.shader = &model->shader;
-	Object::draw(target, states);
-}
-
-int Player::getRand(){
-	return 0;// (rand() - RAND_MAX/2) % 300;
-}
-
-Vector2f Player::subToScreen(Vector2i sub){
-	Vector2f screen;
-	screen.x = sub.x / 144.0f;
-	screen.y = sub.y / 144.0f;
-	return screen;
 }
 
 void Player::noJump(){

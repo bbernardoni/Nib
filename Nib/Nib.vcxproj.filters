@@ -62,9 +62,6 @@
     <ClCompile Include="objs\player.cpp">
       <Filter>Source Files\objs</Filter>
     </ClCompile>
-    <ClCompile Include="models\playerModel.cpp">
-      <Filter>Source Files\models</Filter>
-    </ClCompile>
     <ClCompile Include="res.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,6 +70,12 @@
     </ClCompile>
     <ClCompile Include="objs\world.cpp">
       <Filter>Source Files\objs</Filter>
+    </ClCompile>
+    <ClCompile Include="models\model.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="core\vectObj.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +109,6 @@
     <ClInclude Include="core\machine.h">
       <Filter>Source Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="models\playerModel.h">
-      <Filter>Source Files\models</Filter>
-    </ClInclude>
     <ClInclude Include="objs\world.h">
       <Filter>Source Files\objs</Filter>
     </ClInclude>
@@ -123,6 +123,12 @@
     </ClInclude>
     <ClInclude Include="gameInput.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="models\model.h">
+      <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="core\vectObj.h">
+      <Filter>Source Files\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

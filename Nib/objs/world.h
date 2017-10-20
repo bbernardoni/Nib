@@ -1,14 +1,14 @@
 #pragma once
 
-#include "../core/object.h"
+#include "../core/vectObj.h"
+#include "../res.h"
 
-class World: public Object {
+class World: public VectObj {
 public:
 	World(Game& game);
 
 	void update();
 
 private:
-	void draw(RenderTarget& target, RenderStates states) const;
 
 };
