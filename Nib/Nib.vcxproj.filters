@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\input">
+      <UniqueIdentifier>{ad040c66-a8f8-40a0-96cc-2bac444598e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{0fe035fa-9486-41d6-97f8-8933fa05f5d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\objs">
+      <UniqueIdentifier>{2cb15033-1d01-4205-a142-4b715115fb0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models">
+      <UniqueIdentifier>{03545019-991c-4843-95be-3e060434555a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{c1b9374e-8b75-4b6c-9fe4-b8196a53d534}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input\axisInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\boolDirInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\dirHelper.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\floatDirInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\input.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\keyInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\textInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\trigBoolInput.cpp">
+      <Filter>Source Files\input</Filter>
+    </ClCompile>
+    <ClCompile Include="core\object.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="objs\player.cpp">
+      <Filter>Source Files\objs</Filter>
+    </ClCompile>
+    <ClCompile Include="models\playerModel.cpp">
+      <Filter>Source Files\models</Filter>
+    </ClCompile>
+    <ClCompile Include="res.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objs\world.cpp">
+      <Filter>Source Files\objs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="input\trigBoolInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\axisInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\boolDirInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\dirHelper.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\floatDirInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\keyInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\textInput.h">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="core\object.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\machine.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="models\playerModel.h">
+      <Filter>Source Files\models</Filter>
+    </ClInclude>
+    <ClInclude Include="objs\world.h">
+      <Filter>Source Files\objs</Filter>
+    </ClInclude>
+    <ClInclude Include="objs\player.h">
+      <Filter>Source Files\objs</Filter>
+    </ClInclude>
+    <ClInclude Include="res.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameInput.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\DejaVuSansMono.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\player.mod">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\line.geom">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\forward.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\glow.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
