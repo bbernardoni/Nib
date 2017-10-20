@@ -247,7 +247,7 @@ int main()
 				Vector2i pos = scale*(mpos-Vector2i(WIN_WIDTH/2, WIN_HEIGHT/2));
 				if(cmdState == add){
 					pos = getPos(arrs, mpos);
-					cout << "added point " << getPointStr(arrs[arrI][i]) << endl;
+					cout << "added point " << getPointStr(pos) << endl;
 					arrs[arrI].push_back(pos);
 				} else if(cmdState == slide){
 					slidePoint = -1;
