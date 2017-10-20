@@ -11,7 +11,7 @@ using namespace std;
 #define WIN_WIDTH 1600
 #define WIN_HEIGHT 900
 #define READ
-string filename = "player.mod";
+string filename = "world1.mod";
 
 /* Controls
 A: add mode
@@ -21,10 +21,13 @@ C: copy mode
 Left/Right: move layer
 R: reset zoom to 1600 mode
 F: reset zoom to 1920 mode (my fullscreen mode)
+E: reset zoom to 3840 mode (double/expanded mode)
 L: set layer to loop
 H: hide circles
 Z: scale/zoom model
+G: align to zoom level
 Shft: align to x/y vals
+Ctrl: stop aligning to points/origin
 
 LMouse: perform mode action
 RMouse: set origin
@@ -64,13 +67,18 @@ string getPointStr(Vector2i point){
 
 Vector2i getPos(vector<vector<Vector2i>>& arrs, Vector2i mpos){
 	Vector2i pos = scale*(mpos-Vector2i(WIN_WIDTH/2, WIN_HEIGHT/2));
-	for(size_t i=0; i<arrs.size(); i++){
-		for(size_t j=0; j<arrs[i].size(); j++){
-			if(cmdState == slide && slidePoint == j && Mouse::isButtonPressed(Mouse::Left) && i == arrI)
-				continue;
-			Vector2f diff = Vector2f(pos - arrs[i][j])/(float)SCALE;
-			if(diff.x*diff.x + diff.y*diff.y < POINT_RAD*POINT_RAD){
-				return arrs[i][j];
+	if(!Keyboard::isKeyPressed(Keyboard::LControl)&&!Keyboard::isKeyPressed(Keyboard::RControl)){
+		Vector2f delta = Vector2f(pos)/(float)SCALE;
+		if(delta.x*delta.x + delta.y*delta.y < POINT_RAD*POINT_RAD)
+			return Vector2i(0,0);
+		for(size_t i=0; i<arrs.size(); i++){
+			for(size_t j=0; j<arrs[i].size(); j++){
+				if(cmdState == slide && slidePoint == j && Mouse::isButtonPressed(Mouse::Left) && i == arrI)
+					continue;
+				Vector2f diff = Vector2f(pos - arrs[i][j])/(float)SCALE;
+				if(diff.x*diff.x + diff.y*diff.y < POINT_RAD*POINT_RAD){
+					return arrs[i][j];
+				}
 			}
 		}
 	}
@@ -84,6 +92,8 @@ Vector2i getPos(vector<vector<Vector2i>>& arrs, Vector2i mpos){
 				if(abs(diff.y) < POINT_RAD) pos.y = arrs[i][j].y;
 			}
 		}
+		if(abs(pos.x)/(float)SCALE < POINT_RAD) pos.x = 0;
+		if(abs(pos.y)/(float)SCALE < POINT_RAD) pos.y = 0;
 	}
 	if(pos.x < -WIN_WIDTH /2*SCALE) pos.x = -WIN_WIDTH /2*SCALE;
 	if(pos.x >  WIN_WIDTH /2*SCALE) pos.x =  WIN_WIDTH /2*SCALE;
@@ -115,8 +125,8 @@ int main()
 	centV[1].position = Vector2f(WIN_WIDTH/2.0f, WIN_HEIGHT/2.0f+10);
 
 #ifdef READ
-	{
-		ifstream inF(filename);
+	ifstream inF(filename);
+	if(inF){
 		size_t arrsSize;
 		inF >> arrsSize;
 		arrs.clear();
@@ -194,6 +204,10 @@ int main()
 					scale = 120;
 					printState();
 				}
+				if(event.key.code == Keyboard::E){
+					scale = 240;
+					printState();
+				}
 				if(event.key.code == Keyboard::L){
 					looped[arrI] = !looped[arrI];
 				}
@@ -204,7 +218,8 @@ int main()
 					if(zoomScale < 0){
 						zoomScale = scale;
 						cout << "init zoom scale to " << zoomScale << endl;
-					} else {
+					}
+					else {
 						for(size_t i=0; i<arrs.size(); i++){
 							for(size_t j=0; j<arrs[i].size(); j++){
 								arrs[i][j] = arrs[i][j]*scale/zoomScale;
@@ -214,13 +229,25 @@ int main()
 						zoomScale = -1;
 					}
 				}
+				if(event.key.code == Keyboard::G){
+					for(size_t i=0; i<arrs.size(); i++){
+						for(size_t j=0; j<arrs[i].size(); j++){
+							int offset = scale/2;
+							Vector2i offCoord = arrs[i][j];
+							offCoord.x += (offCoord.x<0? -offset: offset);
+							offCoord.y += (offCoord.y<0? -offset: offset);
+							arrs[i][j] = offCoord / scale * scale;
+						}
+					}
+					cout << "aligning model to " << scale << endl;
+				}
 			}
 			if(event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left){
 				Vector2i mpos(event.mouseButton.x, event.mouseButton.y);
 				Vector2i pos = scale*(mpos-Vector2i(WIN_WIDTH/2, WIN_HEIGHT/2));
 				if(cmdState == add){
 					pos = getPos(arrs, mpos);
-					cout << "add point ";
+					cout << "added point " << getPointStr(arrs[arrI][i]) << endl;
 					arrs[arrI].push_back(pos);
 				} else if(cmdState == slide){
 					slidePoint = -1;
@@ -235,7 +262,7 @@ int main()
 					for(size_t i=0; i<arrs[arrI].size(); i++){
 						Vector2f diff = Vector2f(pos - arrs[arrI][i])/(float)SCALE;
 						if(diff.x*diff.x + diff.y*diff.y < POINT_RAD*POINT_RAD){
-							cout << "delete point " << getPointStr(arrs[arrI][i]) << endl;
+							cout << "deleted point " << getPointStr(arrs[arrI][i]) << endl;
 							for(i++; i<arrs[arrI].size(); i++){
 								arrs[arrI][i-1] = arrs[arrI][i];
 							}
@@ -248,15 +275,15 @@ int main()
 						Vector2f diff = Vector2f(pos - arrs[arrI][i])/(float)SCALE;
 						if(diff.x*diff.x + diff.y*diff.y < POINT_RAD*POINT_RAD){
 							arrs[arrI].resize(arrs[arrI].size()+1);
-							for(size_t j=arrs[arrI].size()-1; i<j-1; j--){
+							for(size_t j=arrs[arrI].size()-1; i<j; j--){
 								arrs[arrI][j] = arrs[arrI][j-1];
 							}
-							if(arrs[arrI].size() > i+2){
-								arrs[arrI][i+1] = (arrs[arrI][i]+arrs[arrI][i+2])/2;
+							if(i>0){
+								arrs[arrI][i] = (arrs[arrI][i-1]+arrs[arrI][i+1])/2;
 							} else {
-								arrs[arrI][i+1] = arrs[arrI][i] + Vector2i(int(POINT_RAD*SCALE*3), int(POINT_RAD*SCALE*3));
+								arrs[arrI][i] = arrs[arrI][i] + Vector2i(int(POINT_RAD*SCALE*3), int(POINT_RAD*SCALE*3));
 							}
-							cout << "insert point " << getPointStr(arrs[arrI][i+1]) << endl;
+							cout << "inserted point " << getPointStr(arrs[arrI][i]) << endl;
 							break;
 						}
 					}
