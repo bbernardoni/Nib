@@ -13,6 +13,7 @@ public:
 	virtual ~Object(){}
 
 	virtual void update(){}
+	virtual void preDraw(){}
 
 protected:
 	virtual void draw(RenderTarget& target, RenderStates states) const;
@@ -23,6 +24,7 @@ protected:
 	void removeDrawable(Drawable* drawable);
 
 	void updateChildren();
+	void preDrawChildren();
 
 	Game& game;
 

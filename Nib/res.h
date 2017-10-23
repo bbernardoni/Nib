@@ -8,9 +8,9 @@ class Res {
 public:
 	Res();
 
-	Model* getPlayerModel();
-	Model* getWorld1Model();
-	Font* getMonoFont();
+	const Model& getPlayerModel();
+	const Model& getWorld1Model();
+	const Font& getMonoFont();
 
 private:
 	Model* playerMod;

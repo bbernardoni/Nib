@@ -12,7 +12,6 @@ Game::Game():
 	win.setFramerateLimit(60);
 	frame = 0;
 
-	player.setPosition(100, 200);
 	addChild(&player);
 
 	world.setPosition(Vector2f(getWinSize()/2u));
@@ -38,7 +37,9 @@ void Game::update(){
 	InputBase::updateAll();
 
 	updateChildren();
+	world.testCollision(player);
 
+	preDrawChildren();
 	win.clear();
 	win.draw(*this);
 	win.display();

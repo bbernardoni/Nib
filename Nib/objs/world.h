@@ -9,6 +9,7 @@ public:
 
 	void update();
 
+	void testCollision(VectObj& obj);
 private:
 
 };

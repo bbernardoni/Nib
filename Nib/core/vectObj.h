@@ -7,17 +7,29 @@
 
 class VectObj: public Object {
 public:
-	VectObj(Game& game, Model* model);
+	VectObj(Game& game, const Model& model);
 	virtual ~VectObj(){}
+
+	virtual void preDraw();
+
+	const Model& getModel();
+	const vector<Vector2i>& getAnimNibsOff();
 
 protected:
 	void draw(RenderTarget& target, RenderStates states) const;
 
-	void updateChildren();
-
-	int getRand() const;
 	Vector2f subToScreen(Vector2i sub) const;
 
+	Vector2i pos;
+	Vector2i vel;
+
+private:
+	void fuzzNibs();
+	void calcRibs();
+
+	const Model& model;
+
+	vector<Vector2i> animNibsOff;
+	vector<Vector2i> fuzzNibsOff;
 	vector<VertexArray> ribs;
-	Model* model;
 };

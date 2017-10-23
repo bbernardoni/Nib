@@ -28,3 +28,8 @@ void Object::updateChildren(){
 	for(auto child: children)
 		child->update();
 }
+
+void Object::preDrawChildren(){
+	for(auto child: children)
+		child->preDraw();
+}

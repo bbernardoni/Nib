@@ -5,22 +5,22 @@ Res::Res(){
 	monoFont = nullptr;
 }
 
-Model* Res::getPlayerModel(){
+const Model& Res::getPlayerModel(){
 	if(!playerMod)
 		playerMod = new Model("res/player.mod");
-	return playerMod;
+	return *playerMod;
 }
 
-Model* Res::getWorld1Model(){
+const Model& Res::getWorld1Model(){
 	if(!world1Model)
 		world1Model = new Model("res/world1.mod");
-	return world1Model;
+	return *world1Model;
 }
 
-Font* Res::getMonoFont(){
+const Font& Res::getMonoFont(){
 	if(!monoFont){
 		monoFont = new Font();
 		monoFont->loadFromFile("res/DejaVuSansMono.ttf");
 	}
-	return monoFont;
+	return *monoFont;
 }

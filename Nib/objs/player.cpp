@@ -5,77 +5,60 @@ Player::Player(Game& game):
 	VectObj(game, game.getRes().getPlayerModel()),
 	jumpFSM(this)
 {
-	moveMaxSpeed = 10.0f;
-	moveAccel = 4.0f;
-	moveDrag = 0.7f;
-	jumpSpeed = 20.0f;
-	jumpDrag = 0.95f;
-	gravity = -2.0f;
+	pos = Vector2i(-100800, -36000);
 
-	moveVel = 0.0f;
+	moveMaxSpeed = 1440;
+	moveAccel = 576;
+	moveDrag = 0.7f;
+
+	jumpSpeed = -2880;
+	jumpDrag = 0.95f;
+	gravity = 288;
+
 	jumpFSM.setState(&Player::noJump);
-	vertVel = 0.0f;
 }
 
 void Player::update(){
 	Dir dir = game.getInput().getPDir();
 
-	moveVel *= moveDrag;
-	moveVel += moveAccel*DirHelper::getHori(dir);
-	if(moveVel > moveMaxSpeed) moveVel = moveMaxSpeed;
-	else if(moveVel < -moveMaxSpeed) moveVel = -moveMaxSpeed;
-	move(moveVel, 0.0f);
+	vel.x = int(vel.x*moveDrag);
+	vel.x += moveAccel*DirHelper::getHori(dir);
+	if(vel.x > moveMaxSpeed) vel.x = moveMaxSpeed;
+	else if(vel.x < -moveMaxSpeed) vel.x = -moveMaxSpeed;
 
 	jumpFSM.updateState();
+	if(pos.y + vel.y > 53000)
+		vel.y = 53000 - pos.y;
 
 	updateChildren();
 }
 
 void Player::noJump(){
-	Vector2f pos = getPosition();
-	bool onGround = pos.y >= 800;
+	bool onGround = pos.y >= 50400;
 	bool jump = game.getInput().getPJump();
 
-	vertVel += gravity;
+	vel.y += gravity;
 	if(jump && onGround){
 		jumpFrame = game.getFrame();
-		vertVel = jumpSpeed;
+		vel.y = jumpSpeed;
 		jumpFSM.setState(&Player::holdJump);
 	}
-
-	vertVel = vertColl(vertVel);
-	move(0.0f, -vertVel);
 }
 
 void Player::holdJump(){
 	bool jump = game.getInput().getPJump();
 
-	vertVel *= jumpDrag;
+	vel.y = int(vel.y*jumpDrag);
 	if(!jump)
 		jumpFSM.setState(&Player::noJump);
 	else if(game.getFrame()-jumpFrame > 15)
 		jumpFSM.setState(&Player::realseJump);
-
-	vertVel = vertColl(vertVel);
-	move(0.0f, -vertVel);
 }
 
 void Player::realseJump(){
 	bool jump = game.getInput().getPJump();
 
-	vertVel += gravity;
+	vel.y += gravity;
 	if(!jump)
 		jumpFSM.setState(&Player::noJump);
-
-	vertVel = vertColl(vertVel);
-	move(0.0f, -vertVel);
-}
-
-float Player::vertColl(float vel){
-	Vector2f pos = getPosition();
-
-	if(pos.y - vel > 800)
-		return pos.y - 800;
-
-	return vel;
 }

@@ -15,17 +15,13 @@ private:
 	void holdJump();
 	void realseJump();
 
-	float vertColl(float vel);
-
-	float moveMaxSpeed;
-	float moveAccel;
+	int moveMaxSpeed;
+	int moveAccel;
 	float moveDrag;
-	float jumpSpeed;
+	int jumpSpeed;
 	float jumpDrag;
-	float gravity;
+	int gravity;
 
-	float moveVel;
 	Machine jumpFSM;
-	float vertVel;
 	int jumpFrame;
 };
